@@ -21,7 +21,7 @@ Para este projeto, foram estabelicidos dois domínios - RIP e EIGRP. Ambos os do
   - RIP/EIGRP: Border
   - AS10/AS20: R4
 
-![Topologia](C:\Users\pedro\git\unifor\redes\topologia.jpeg)
+![Topologia](topologia.jpeg)
 
 Uma demonstração do funcionamento da rede pode ser encontrada [aqui](https://youtu.be/SPWk1a4vCYo).
 
