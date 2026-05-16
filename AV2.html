@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AV2.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="relatório-av2">Relatório AV2</h1>
+<p>Pedro H. Gaya - 2224655</p>
+<hr>
+<h2 id="resumo">Resumo</h2>
+<p>Para este projeto, foram estabelicidos dois domínios - RIP e EIGRP. Ambos os domíninos compartilham de duas VLANs - 10 e 20. Em cada domínio, foram criados subnets, com um roteador por subnet. Toda subnet possui dois PCs, um por VLAN.</p>
+<ul>
+<li>RIP:
+<ul>
+<li>A: Switch0, R1, PC0, PC7</li>
+<li>B: Switch1, R2, PC1, PC6</li>
+</ul>
+</li>
+<li>AS10:
+<ul>
+<li>C: Switch2, R3, PC2, PC11, DHCP</li>
+<li>D: Switch3, R4, PC3, PC8</li>
+</ul>
+</li>
+<li>AS20:
+<ul>
+<li>E: Switch4, R5, PC4, PC9</li>
+<li>F: Switch5, R6, PC5, PC10</li>
+</ul>
+</li>
+<li>Dsitribuidores:
+<ul>
+<li>RIP/EIGRP: Border</li>
+<li>AS10/AS20: R4</li>
+</ul>
+</li>
+</ul>
+<p><img src="file:///C:/Users/pedro/git/unifor/redes/topologia.jpeg" alt="Topologia"></p>
+<p>Uma demonstração do funcionamento da rede pode ser encontrada <a href="https://youtu.be/SPWk1a4vCYo">aqui</a>.</p>
+<p>Todos os arquivos utilizados nesse projeto estão disponíveis no <a href="https://github.com/PedroGaya/av2-redes">GitHub</a>.</p>
+<h2 id="cálculos-de-sub-redes">Cálculos de Sub-redes</h2>
+<h3 id="máscara-26--redes-lan">Máscara /26 — Redes LAN</h3>
+<p>Cada rede /24 foi dividida em sub-redes /26, fornecendo 62 hosts utilizáveis por sub-rede.</p>
+<ul>
+<li>Bits de host: 6 → 2^6 - 2 = <strong>62 hosts</strong></li>
+<li>Máscara: 255.255.255.192</li>
+<li>Tamanho do bloco: 64</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Sub-rede</th>
+<th>Endereço de Rede</th>
+<th>Primeiro</th>
+<th>Último</th>
+<th>Broadcast</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/26 (VLAN 10)</td>
+<td>x.x.x.0</td>
+<td>x.x.x.1</td>
+<td>x.x.x.62</td>
+<td>x.x.x.63</td>
+</tr>
+<tr>
+<td>/26 (VLAN 20)</td>
+<td>x.x.x.64</td>
+<td>x.x.x.65</td>
+<td>x.x.x.126</td>
+<td>x.x.x.127</td>
+</tr>
+</tbody>
+</table>
+<h3 id="máscara-30--links-wan">Máscara /30 — Links WAN</h3>
+<p>Usada nos links ponto a ponto entre roteadores, fornecendo exatamente 2 hosts.</p>
+<ul>
+<li>Bits de host: 2 → 2^4 - 2 = <strong>2 hosts</strong></li>
+<li>Máscara: 255.255.255.252</li>
+<li>Tamanho do bloco:: 4</li>
+</ul>
+<hr>
+<h2 id="plano-de-endereçamento-ip">Plano de Endereçamento IP</h2>
+<h3 id="redes-wan">Redes WAN</h3>
+<table>
+<thead>
+<tr>
+<th>Roteador A</th>
+<th>IP Lado A</th>
+<th>Roteador B</th>
+<th>IP Lado B</th>
+<th>Rede</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td>10.0.1.1</td>
+<td>R2</td>
+<td>10.0.1.2</td>
+<td>10.0.1.0/30</td>
+</tr>
+<tr>
+<td>R1</td>
+<td>10.0.2.1</td>
+<td>Border</td>
+<td>10.0.2.2</td>
+<td>10.0.2.0/30</td>
+</tr>
+<tr>
+<td>Border</td>
+<td>10.0.3.1</td>
+<td>R3</td>
+<td>10.0.3.2</td>
+<td>10.0.3.0/30</td>
+</tr>
+<tr>
+<td>R3</td>
+<td>10.0.4.1</td>
+<td>R4</td>
+<td>10.0.4.2</td>
+<td>10.0.4.0/30</td>
+</tr>
+<tr>
+<td>R4</td>
+<td>10.0.5.1</td>
+<td>R5</td>
+<td>10.0.5.2</td>
+<td>10.0.5.0/30</td>
+</tr>
+<tr>
+<td>R5</td>
+<td>10.0.6.1</td>
+<td>R6</td>
+<td>10.0.6.2</td>
+<td>10.0.6.0/30</td>
+</tr>
+</tbody>
+</table>
+<h3 id="redes-lan">Redes LAN</h3>
+<table>
+<thead>
+<tr>
+<th>Subnet</th>
+<th>Roteador</th>
+<th>VLAN</th>
+<th>Rede</th>
+<th>Máscara</th>
+<th>Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>R1</td>
+<td>10</td>
+<td>192.168.1.0</td>
+<td>/26</td>
+<td>192.168.1.1</td>
+</tr>
+<tr>
+<td>A</td>
+<td>R1</td>
+<td>20</td>
+<td>192.168.1.64</td>
+<td>/26</td>
+<td>192.168.1.65</td>
+</tr>
+<tr>
+<td>B</td>
+<td>R2</td>
+<td>10</td>
+<td>192.168.2.0</td>
+<td>/26</td>
+<td>192.168.2.1</td>
+</tr>
+<tr>
+<td>B</td>
+<td>R2</td>
+<td>20</td>
+<td>192.168.2.64</td>
+<td>/26</td>
+<td>192.168.2.65</td>
+</tr>
+<tr>
+<td>C</td>
+<td>R3</td>
+<td>10</td>
+<td>192.168.3.0</td>
+<td>/26</td>
+<td>192.168.3.1</td>
+</tr>
+<tr>
+<td>C</td>
+<td>R3</td>
+<td>20</td>
+<td>192.168.3.64</td>
+<td>/26</td>
+<td>192.168.3.65</td>
+</tr>
+<tr>
+<td>D</td>
+<td>R4</td>
+<td>10</td>
+<td>192.168.4.0</td>
+<td>/26</td>
+<td>192.168.4.1</td>
+</tr>
+<tr>
+<td>D</td>
+<td>R4</td>
+<td>20</td>
+<td>192.168.4.64</td>
+<td>/26</td>
+<td>192.168.4.65</td>
+</tr>
+<tr>
+<td>E</td>
+<td>R5</td>
+<td>10</td>
+<td>192.168.5.0</td>
+<td>/26</td>
+<td>192.168.5.1</td>
+</tr>
+<tr>
+<td>E</td>
+<td>R5</td>
+<td>20</td>
+<td>192.168.5.64</td>
+<td>/26</td>
+<td>192.168.5.65</td>
+</tr>
+<tr>
+<td>F</td>
+<td>R6</td>
+<td>10</td>
+<td>192.168.6.0</td>
+<td>/26</td>
+<td>192.168.6.1</td>
+</tr>
+<tr>
+<td>F</td>
+<td>R6</td>
+<td>20</td>
+<td>192.168.6.64</td>
+<td>/26</td>
+<td>192.168.6.65</td>
+</tr>
+<tr>
+<td>C (Servidor)</td>
+<td>R3</td>
+<td>10</td>
+<td>192.168.3.10</td>
+<td>/26</td>
+<td>192.168.3.1</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="implementação">Implementação</h2>
+<h3 id="switches">Switches</h3>
+<p>Configuração das VLANs e portas em todos os switches (Switch0 a Switch5):</p>
+<ul>
+<li>Criação das VLANs 10 e 20</li>
+<li>Portas de acesso para os hosts em cada VLAN</li>
+<li>Porta trunk para o roteador carregando ambas as VLANs</li>
+</ul>
+<h3 id="roteadores">Roteadores</h3>
+<p>Duas subinterfaces foram criadas: Uma por VLAN. Cada link WAN recebe um endereço /30 em cada extremidade.</p>
+<ul>
+<li>Domínio RIP (R1, R2, Border): RIP configurado com <code>no auto-summary</code> para suportar as sub-redes /26 e /30. Cada roteador anuncia suas redes diretamente conectadas.</li>
+<li>Domínio EIGRP AS10 (R3, R4, Border): EIGRP processo 10 configurado para cada sub-rede /26. Border participa do AS10 pelo lado EIGRP.</li>
+<li>Domínio EIGRP AS20 (R5, R6, R4): EIGRP processo 20 configurado em R5 e R6. R4 executa ambos os processos (AS10 e AS20) simultaneamente, sendo a fronteira entre os dois AS.</li>
+</ul>
+<p>Foram criados dois pontos de redistribuição na topologia:</p>
+<ul>
+<li><strong>Border</strong>: redistribui RIP para EIGRP AS10 e EIGRP AS10 para RIP</li>
+<li><strong>R4</strong>: redistribui EIGRP AS10 para AS20 e EIGRP AS20 para AS10</li>
+</ul>
+<p>R1 serve DHCP diretamente para as VLANs 10 e 20 da subnet A, com pools locais e IPs excluídos para os gateways.</p>
+<p>Para as outras subnets, o servidor DHCP centraliza a distribuição de endereços. Os roteadores R2, R3, R4, R5 e R6 utilizam <code>ip helper-address</code> nas interfaces para encaminhar os pedidos DHCP ao servidor.</p>
+<h3 id="pcs-e-servidor">PCs e Servidor</h3>
+<p>Todos os PCs foram configurados com DHCP.</p>
+<p>O servidor DHCP foi configurado com IP estático 192.168.10.3, na subrede C, conectado ao roteador R3 pelo Switch2. Foi criada duas pools DHCP para cada subrede, sendo uma por vlan.</p>
+<hr>
+<h2 id="comandos-utilizados">Comandos Utilizados</h2>
+<h3 id="vlans-e-trunk-switch">VLANs e Trunk (Switch)</h3>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vlan 10</code></td>
+<td>Cria a VLAN 10</td>
+</tr>
+<tr>
+<td><code>switchport mode access</code></td>
+<td>Define a porta como acesso</td>
+</tr>
+<tr>
+<td><code>switchport access vlan 10</code></td>
+<td>Associa a porta à VLAN 10</td>
+</tr>
+<tr>
+<td><code>switchport mode trunk</code></td>
+<td>Define a porta como trunk</td>
+</tr>
+<tr>
+<td><code>switchport trunk allowed vlan 10,20</code></td>
+<td>Permite apenas as VLANs necessárias no trunk</td>
+</tr>
+</tbody>
+</table>
+<p>O mesmo foi feito para vlan 20.</p>
+<h3 id="subinterfaces">Subinterfaces</h3>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>interface fastethernet0/0.10</code></td>
+<td>Cria subinterface para VLAN 10</td>
+</tr>
+<tr>
+<td><code>encapsulation dot1Q 10</code></td>
+<td>Define encapsulamento 802.1Q com VLAN 10</td>
+</tr>
+<tr>
+<td><code>ip address 192.168.1.1 255.255.255.192</code></td>
+<td>Atribui IP à subinterface, que atuará como gateway da VLAN</td>
+</tr>
+</tbody>
+</table>
+<h3 id="rip">RIP</h3>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>router rip</code></td>
+<td>Ativa o processo RIP</td>
+</tr>
+<tr>
+<td><code>no auto-summary</code></td>
+<td>Desativa sumarização automática (necessário para /26 e /30)</td>
+</tr>
+<tr>
+<td><code>network 192.168.1.0</code></td>
+<td>Anuncia a rede no RIP</td>
+</tr>
+<tr>
+<td><code>redistribute eigrp 10</code></td>
+<td>Injeta rotas EIGRP no RIP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="eigrp">EIGRP</h3>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>router eigrp 10</code></td>
+<td>Ativa o processo EIGRP com AS número 10</td>
+</tr>
+<tr>
+<td><code>no auto-summary</code></td>
+<td>Desativa sumarização automática</td>
+</tr>
+<tr>
+<td><code>network 192.168.3.0 0.0.0.63</code></td>
+<td>Anuncia a sub-rede usando wildcard preciso</td>
+</tr>
+<tr>
+<td><code>redistribute rip metric 10000 100 255 1 1500</code></td>
+<td>Injeta rotas RIP no EIGRP com métrica composta</td>
+</tr>
+<tr>
+<td><code>redistribute eigrp 20 metric 10000 100 255 1 1500</code></td>
+<td>Redistribui rotas entre sistemas autônomos EIGRP</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dhcp">DHCP</h3>
+<table>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Função</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ip dhcp excluded-address</code></td>
+<td>Reserva IPs que não serão distribuídos automaticamente</td>
+</tr>
+<tr>
+<td><code>ip dhcp pool NOME</code></td>
+<td>Cria um pool DHCP com o nome especificado</td>
+</tr>
+<tr>
+<td><code>network 192.168.1.0 255.255.255.192</code></td>
+<td>Define a rede do pool</td>
+</tr>
+<tr>
+<td><code>default-router 192.168.1.1</code></td>
+<td>Define o gateway entregue aos clientes</td>
+</tr>
+<tr>
+<td><code>dns-server 8.8.8.8</code></td>
+<td>Define o servidor DNS entregue aos clientes</td>
+</tr>
+<tr>
+<td><code>ip helper-address 192.168.3.10</code></td>
+<td>Encaminha broadcasts DHCP ao servidor remoto</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+</html>
