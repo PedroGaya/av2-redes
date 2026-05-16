@@ -23,10 +23,6 @@ Para este projeto, foram estabelicidos dois domínios - RIP e EIGRP. Ambos os do
 
 ![Topologia](topologia.jpeg)
 
-Uma demonstração do funcionamento da rede pode ser encontrada [aqui](https://youtu.be/SPWk1a4vCYo).
-
-Todos os arquivos utilizados nesse projeto estão disponíveis no [GitHub](https://github.com/PedroGaya/av2-redes).
-
 ## Cálculos de Sub-redes
 
 ### Máscara /26 — Redes LAN
@@ -171,3 +167,8 @@ O mesmo foi feito para vlan 20.
 | `default-router 192.168.1.1`          | Define o gateway entregue aos clientes                 |
 | `dns-server 8.8.8.8`                  | Define o servidor DNS entregue aos clientes            |
 | `ip helper-address 192.168.3.10`      | Encaminha broadcasts DHCP ao servidor remoto           |
+
+## Bibliografia
+
+Uma demonstração do funcionamento da rede pode ser encontrada [aqui](https://youtu.be/SPWk1a4vCYo).
+Todos os arquivos utilizados nesse projeto estão disponíveis no [GitHub](https://github.com/PedroGaya/av2-redes).
