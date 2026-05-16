@@ -25,7 +25,7 @@ Para este projeto, foram estabelicidos dois domínios - RIP e EIGRP. Ambos os do
 
 Uma demonstração do funcionamento da rede pode ser encontrada [aqui](https://youtu.be/SPWk1a4vCYo).
 
-Todos os arquivos utilizados nesse projeto estão disponíveis no GitHub:
+Todos os arquivos utilizados nesse projeto estão disponíveis no [GitHub](https://github.com/PedroGaya/av2-redes).
 
 ## Cálculos de Sub-redes
 
