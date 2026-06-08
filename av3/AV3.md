@@ -1,4 +1,4 @@
-# Relatório de Implementação — Rede Corporativa OSPF + BGP
+# Relatório AV3
 
 Pedro H. Gaya - 2224655
 
@@ -6,7 +6,18 @@ Pedro H. Gaya - 2224655
 
 ## Resumo
 
-[TODO]
+Para este projeto, foram estabelecidos dois domínios - OSPF e BGP. Ambos os domínios compartilham duas VLANs: 10 e 20. Em cada domínio foram criadas subnets, com um roteador por subnet. Toda subnet possui dois PCs, um por VLAN.
+
+- OSPF:
+  - A: Switch0, R1, PC0, PC7
+  - B: Switch1, R2, PC1, PC6
+- BGP:
+  - C: Switch2, R3 (AS100), PC2, PC11, DHCP
+  - D: Switch3, R4 (AS300), PC3, PC8
+- Distribuidores:
+  - OSPF/BGP: R_BORDER (AS200)
+
+![Topologia](topologia.jpeg)
 
 ## Cálculos de Sub-redes
 
@@ -77,10 +88,10 @@ Duas subinterfaces são criadas, uma por VLAN. Cada link recebe um endereço /30
 
 O OSPF configurado em R1, R2 e R_BORDER, todos na área 0. Cada roteador anuncia suas redes com wildcards correspondentes às máscaras utilizadas.
 
-O BGP configurado com dois tipos de sessão:
+O BGP configurado com sessões eBGP entre três sistemas autônomos distintos:
 
 - **eBGP** entre R_BORDER (AS 200) e R3 (AS 100)
-- **iBGP** entre R3 e R4, ambos no AS 100
+- **eBGP** entre R3 (AS 100) e R4 (AS 300)
 
 Cada roteador BGP anuncia suas redes com o comando `network` e redistribui as interfaces conectadas.
 
@@ -111,7 +122,7 @@ SRV-DHCP (192.168.3.10) centraliza a distribuição de endereços para o Site C 
 
 O mesmo foi feito para vlan 20.
 
-### Subinterfaces — Router-on-a-Stick
+### Subinterfaces
 
 | Comando                                  | Função                                                   |
 | ---------------------------------------- | -------------------------------------------------------- |
@@ -133,7 +144,7 @@ O mesmo foi feito para vlan 20.
 | ------------------------------------------ | --------------------------------------------- |
 | `router bgp 100`                           | Ativa o processo BGP no AS 100                |
 | `neighbor 10.0.3.1 remote-as 200`          | Define um peer eBGP no AS 200                 |
-| `neighbor 10.0.4.2 remote-as 100`          | Define um peer iBGP no mesmo AS               |
+| `neighbor 10.0.4.2 remote-as 300`          | Define um peer eBGP no AS 300                 |
 | `network 192.168.3.0 mask 255.255.255.192` | Anuncia a sub-rede no BGP                     |
 | `redistribute connected`                   | Anuncia todas as redes diretamente conectadas |
 | `redistribute ospf 1`                      | Adiciona rotas OSPF no BGP                    |
@@ -152,5 +163,5 @@ O mesmo foi feito para vlan 20.
 
 ## Bibliografia
 
-Uma demonstração do funcionamento da rede pode ser encontrada [aqui](PREENCHER).
-Todos os arquivos utilizados nesse projeto estão disponíveis no [GitHub](PREENCHER).
+Uma demonstração do funcionamento da rede pode ser encontrada [aqui](https://youtu.be/98CfqgySZlA).
+Todos os arquivos utilizados nesse projeto estão disponíveis no [GitHub](https://github.com/PedroGaya/av2-redes/tree/main/av3).
